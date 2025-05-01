@@ -1,0 +1,20 @@
+services:
+  react-app-test:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: ["npm", "run", "test"]
+    volumes:
+      - /app/node_modules
+      - .:/app
+  react-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - .:/app
+    ports:
+      - 3000:3000
+    depends_on:
+      - react-app-test
